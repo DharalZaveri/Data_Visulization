@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas - Basic Shapes</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      
+      // Draw a rectangle
+      context.fillStyle = "red";
+      context.fillRect(50, 50, 100, 50);
+      
+      // Draw a circle
+      context.beginPath();
+      context.arc(200, 100, 50, 0, 2 * Math.PI);
+      context.fillStyle = "green";
+      context.fill();
+      context.stroke();
+      
+      // Draw a line
+      context.beginPath();
+      context.moveTo(300, 50);
+      context.lineTo(300, 150);
+      context.strokeStyle = "blue";
+      context.lineWidth = 3;
+      context.stroke();
+    </script>
+  </body>
+</html>
