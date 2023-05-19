@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas - Advanced Shapes</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      
+      // Draw a star
+      context.fillStyle = "yellow";
+      context.beginPath();
+      context.moveTo(200, 50);
+      context.lineTo(240, 150);
+      context.lineTo(340, 160);
+      context.lineTo(260, 220);
+      context.lineTo(300, 320);
+      context.lineTo(200, 260);
+      context.lineTo(100, 320);
+      context.lineTo(140, 220);
+      context.lineTo(60, 160);
+      context.lineTo(160, 150);
+      context.closePath();
+      context.fill();
+      
+      // Draw a rounded rectangle
+      context.fillStyle = "orange";
+      context.beginPath();
+      context.moveTo(50, 50);
+      context.lineTo(150, 50);
+      context.arcTo(200, 50, 200, 100, 50);
+      context.lineTo(200, 150);
+      context.lineTo(50, 150);
+      context.closePath();
+      context.fill();
+      
+      // Draw an ellipse
+      context.fillStyle = "purple";
+      context.beginPath();
+      context.ellipse(300, 200, 80, 50, 0, 0, 2 * Math.PI);
+      context.fill();
+    </script>
+  </body>
+</html>
