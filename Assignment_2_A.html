@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Bar Chart</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      
+      var data = [30, 50, 80, 120, 200];
+      var barWidth = 40;
+      var barSpacing = 20;
+      var startX = 50;
+      var startY = canvas.height - 50;
+      
+      context.fillStyle = "blue";
+      for (var i = 0; i < data.length; i++) {
+        var barHeight = data[i];
+        var x = startX + (barWidth + barSpacing) * i;
+        var y = startY - barHeight;
+        context.fillRect(x, y, barWidth, barHeight);
+      }
+    </script>
+  </body>
+</html>

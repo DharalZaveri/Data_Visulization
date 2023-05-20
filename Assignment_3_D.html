@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Line Chart with Canvas.js</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+      #chartContainer {
+        width: 400px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chartContainer"></div>
+    <script>
+      var data = [
+        { label: "2010", y: 30 },
+        { label: "2011", y: 50 },
+        { label: "2012", y: 80 },
+        { label: "2013", y: 120 },
+        { label: "2014", y: 200 }
+      ];
+      
+      var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+          text: "Line Chart"
+        },
+        axisY: {
+          title: "Value"
+        },
+        data: [
+          {
+            type: "line",
+            dataPoints: data
+          }
+        ]
+      });
+      
+      chart.render();
+    </script>
+  </body>
+</html>

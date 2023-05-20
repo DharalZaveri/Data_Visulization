@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Column Chart for Four Age Groups with Canvas.js</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+      #chartContainer {
+        width: 400px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chartContainer"></div>
+    <script>
+      var data = [
+        { label: "Group A", age1: 30, age2: 20, age3: 10, age4: 5 },
+        { label: "Group B", age1: 50, age2: 40, age3: 30, age4: 20 },
+        { label: "Group C", age1: 80, age2: 70, age3: 60, age4: 50 },
+        { label: "Group D", age1: 120, age2: 90, age3: 80, age4: 70 },
+        { label: "Group E", age1: 200, age2: 150, age3: 120, age4: 100 }
+      ];
+      
+      var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+          text: "Column Chart for Four Age Groups"
+        },
+        data: [
+          {
+            type: "column",
+            showInLegend: true,
+            legendText: "{label}",
+            dataPoints: data.map(function(item) {
+              return { label: item.label, y: item.age1 };
+            })
+          },
+          {
+            type: "column",
+            showInLegend: true,
+            legendText: "{label}",
+            dataPoints: data.map(function(item) {
+              return { label: item.label, y: item.age2 };
+            })
+          },
+          {
+            type: "column",
+            showInLegend: true,
+            legendText: "{label}",
+            dataPoints: data.map(function(item) {
+              return { label: item.label, y: item.age3 };
+            })
+          },
+          {
+            type: "column",
+            showInLegend: true,
+            legendText: "{label}",
+            dataPoints: data.map(function(item) {
+              return { label: item.label, y: item.age4 };
+            })
+          }
+        ]
+      });
+      
+      chart.render();
+    </script>
+  </body>
+</html>

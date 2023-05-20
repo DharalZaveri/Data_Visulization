@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Read Text File and Draw Simple Bar Chart</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      
+      // Read data from text file
+      fetch("data.txt")
+        .then(response => response.text())
+        .then(data => {
+          var values = data.split(",").map(Number);
+          
+          var barWidth = 40;
+          var barSpacing = 20;
+          var startX = 50;
+          var startY = canvas.height - 50;
+          
+          context.fillStyle = "blue";
+          for (var i = 0; i < values.length; i++) {
+            var barHeight = values[i];
+            var x = startX + (barWidth + barSpacing) * i;
+            var y = startY - barHeight;
+            context.fillRect(x, y, barWidth, barHeight);
+          }
+        });
+    </script>
+  </body>
+</html>

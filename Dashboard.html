@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Dashboard</title>
+    <style>
+      #dashboardCanvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="dashboardCanvas" width="800" height="400"></canvas>
+
+    <script>
+      // Get the canvas element
+      const canvas = document.getElementById("dashboardCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // Dummy data for demonstration purposes
+      const data1 = [50, 80, 120, 70, 90];
+      const data2 = [30, 60, 110, 50, 70];
+      const labels = ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"];
+
+      // Function to draw a bar chart
+      function drawBarChart(data, labels, x, y, width, height, color) {
+        const maxValue = Math.max(...data);
+
+        // Draw bars
+        const barWidth = width / data.length;
+        for (let i = 0; i < data.length; i++) {
+          const barHeight = (data[i] / maxValue) * height;
+          const xPos = x + i * barWidth;
+          const yPos = y + height - barHeight;
+          ctx.fillStyle = color;
+          ctx.fillRect(xPos, yPos, barWidth, barHeight);
+        }
+
+        // Draw labels
+        ctx.fillStyle = "black";
+        ctx.font = "12px Arial";
+        for (let i = 0; i < labels.length; i++) {
+          const labelX = x + i * barWidth + barWidth / 2;
+          const labelY = y + height + 15;
+          ctx.fillText(labels[i], labelX, labelY);
+        }
+      }
+
+      // Function to draw a line chart
+      function drawLineChart(data, labels, x, y, width, height, color) {
+        const maxValue = Math.max(...data);
+        const dataPoints = [];
+
+        // Calculate data points
+        for (let i = 0; i < data.length; i++) {
+          const xPos = x + (i / (data.length - 1)) * width;
+          const yPos = y + height - (data[i] / maxValue) * height;
+          dataPoints.push({ x: xPos, y: yPos });
+        }
+
+        // Draw lines
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        ctx.moveTo(dataPoints[0].x, dataPoints[0].y);
+        for (let i = 1; i < dataPoints.length; i++) {
+          ctx.lineTo(dataPoints[i].x, dataPoints[i].y);
+        }
+        ctx.stroke();
+
+        // Draw labels
+        ctx.fillStyle = "black";
+        ctx.font = "12px Arial";
+        for (let i = 0; i < labels.length; i++) {
+          const labelX = dataPoints[i].x;
+          const labelY = y + height + 15;
+          ctx.fillText(labels[i], labelX, labelY);
+        }
+      }
+
+      // Event listener for canvas click
+      canvas.addEventListener("click", function (event) {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        // Check if the click is within the bounds of a specific chart
+        if (
+          mouseX >= 50 && mouseX <= 250 && mouseY >= 50 && mouseY <= 250
+        ) {
+          // Bar chart clicked
+          console.log("Bar chart clicked");
+        } else if (
+          mouseX >= 400 && mouseX <= 600 && mouseY >= 50 && mouseY <= 250
+        ) {
+          // Line chart clicked
+          console.log("Line chart clicked");
+        }
+      });
+
+      // Draw the initial dashboard components
+      drawBarChart(data1, labels, 50, 50, 200, 200, "blue");
+      drawLineChart(data2, labels, 400, 50, 200, 200, "green");
+    </script>
+  </body>
+</html>

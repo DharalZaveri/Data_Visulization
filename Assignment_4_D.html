@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Donut Chart using Google Charts API</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', { 'packages': ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Work', 11],
+          ['Eat', 2],
+          ['Sleep', 7],
+          ['Exercise', 4],
+          ['Socialize', 3]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          pieHole: 0.4
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 600px; height: 400px;"></div>
+  </body>
+</html>
