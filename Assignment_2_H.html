@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Read JSON Data and Draw Data Table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table"></table>
+    <script>
+      var table = document.getElementById("table");
+      
+      // Read JSON data
+      fetch("data.json")
+        .then(response => response.json())
+        .then(data => {
+          var headers = Object.keys(data[0]);
+          
+          var headerRow = document.createElement("tr");
+          headers.forEach(header => {
+            var th = document.createElement("th");
+            th.textContent = header;
+            headerRow.appendChild(th);
+          });
+          table.appendChild(headerRow);
+          
+          data.forEach(rowData => {
+            var row = document.createElement("tr");
+            headers.forEach(header => {
+              var td = document.createElement("td");
+              td.textContent = rowData[header];
+              row.appendChild(td);
+            });
+            table.appendChild(row);
+          });
+        });
+    </script>
+  </body>
+</html>

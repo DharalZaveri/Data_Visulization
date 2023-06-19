@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Read CSV File and Draw Column Bar Chart</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById("canvas");
+      var context = canvas.getContext("2d");
+      
+      // Read data from CSV file
+      fetch("credit_data.csv")
+        .then(response => response.text())
+        .then(data => {
+          var rows = data.split("\n");
+          var labels = rows[0].split(",");
+          var values = rows[1].split(",").map(Number);
+          
+          var barWidth = 40;
+          var barSpacing = 20;
+          var startX = 50;
+          var startY = canvas.height - 50;
+          
+          context.fillStyle = "blue";
+          for (var i = 0; i < values.length; i++) {
+            var barHeight = values[i];
+            var x = startX + (barWidth + barSpacing) * i;
+            var y = startY - barHeight;
+            context.fillRect(x, y, barWidth, barHeight);
+          }
+          
+          // Draw labels
+          context.fillStyle = "black";
+          context.font = "12px Arial";
+          for (var i = 0; i < labels.length; i++) {
+            var x = startX + (barWidth + barSpacing) * i + barWidth / 2;
+            var y = startY + 15;
+            context.fillText(labels[i], x, y);
+          }
+        });
+    </script>
+  </body>
+</html>

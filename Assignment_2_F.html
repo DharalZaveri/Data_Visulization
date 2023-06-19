@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Read XML File and Draw Data Table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid black;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table"></table>
+    <script>
+      var table = document.getElementById("table");
+      
+      // Read data from XML file
+      fetch("data.xml")
+        .then(response => response.text())
+        .then(data => {
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(data, "text/xml");
+          
+          var rows = xmlDoc.getElementsByTagName("row");
+          for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("cell");
+            var row = document.createElement("tr");
+            for (var j = 0; j < cells.length; j++) {
+              var cell = document.createElement(i === 0 ? "th" : "td");
+              cell.textContent = cells[j].textContent;
+              row.appendChild(cell);
+            }
+            table.appendChild(row);
+          }
+        });
+    </script>
+  </body>
+</html>
